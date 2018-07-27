@@ -15,7 +15,8 @@ const userSchema = mongoose.Schema({
   },
   posts: [
     {
-      type: Object,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'article',
     },
   ],
   gitHub: {
