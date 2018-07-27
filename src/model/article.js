@@ -16,12 +16,14 @@ const articleSchema = mongoose.Schema({
   link: {
     type: String,
   },
-  comments: [{
-    type: String,
-  }],
-  tags: [{
-    type: String,
-  }],
+  comments: {
+    type: Array,
+    default: [],
+  },
+  tags: {
+    type: Array,
+    default: [],
+  },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,

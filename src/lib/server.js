@@ -9,6 +9,7 @@ import errorMiddleWare from './error-middleware';
 import authRoute from '../route/auth-route';
 import userRoute from '../route/user-route';
 import articleRoute from '../route/article-route';
+import commentRoute from '../route/comment-route';
 
 const app = express();
 let server = null;
@@ -23,6 +24,7 @@ app.use(loggerMiddleware);
 app.use(authRoute);
 app.use(userRoute);
 app.use(articleRoute);
+app.use(commentRoute);
 app.all('*', (request, response) => {
   logger.log(logger.INFO, 'SERVER: Returning a 404 from the catch-all/default route');
   return response.sendStatus(404);
