@@ -14,7 +14,9 @@ const userSchema = mongoose.Schema({
     type: String, 
   },
   posts: [
-    
+    {
+      type: Object,
+    },
   ],
   gitHub: {
     type: String, 
