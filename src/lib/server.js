@@ -6,6 +6,10 @@ import logger from './logger';
 import loggerMiddleware from './logger-middleware';
 import errorMiddleWare from './error-middleware';
 
+import authRoute from '../route/auth-route';
+import userRoute from '../route/user-route';
+import articleRoute from '../route/article-route';
+
 const app = express();
 let server = null;
 
@@ -16,6 +20,9 @@ app.use(cors({
 app.use(cookieParser());
 
 app.use(loggerMiddleware);
+app.use(authRoute);
+app.use(userRoute);
+app.use(articleRoute);
 app.all('*', (request, response) => {
   logger.log(logger.INFO, 'SERVER: Returning a 404 from the catch-all/default route');
   return response.sendStatus(404);
