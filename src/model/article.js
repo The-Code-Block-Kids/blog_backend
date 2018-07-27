@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import User from '../model/user';
 
 const articleSchema = mongoose.Schema({
   title: {
@@ -28,5 +29,15 @@ const articleSchema = mongoose.Schema({
   },
 });
 
-const ArticleModel = module.exports = mongoose.model('article', articleSchema);
-export default ArticleModel;
+function articlePrehook(done) {
+  return User.findById(this.createdBy)
+    .then((user) => {
+      user.posts.push(this);
+      return user.save();
+    })
+    .then(() => done())
+    .catch(done);
+}
+
+articleSchema.pre('save', articlePrehook);
+export default mongoose.model('article', articleSchema);

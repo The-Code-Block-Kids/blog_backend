@@ -9,8 +9,8 @@ const jsonParser = json();
 
 articleRouter.get('/articles', (request, response, next) => {
   return ArticleModel.find()
-    .then((events) => {
-      return response.json(events);
+    .then((articles) => {
+      return response.json(articles);
     })
     .catch(next);
 });
