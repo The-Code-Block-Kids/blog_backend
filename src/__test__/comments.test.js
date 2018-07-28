@@ -8,7 +8,7 @@ import Article from '../model/article';
 
 const apiURL = `http://localhost:${process.env.PORT}`;
 
-describe('Verify POST /comments', () => {
+describe('Verify POST /comment', () => {
   beforeAll(startServer);
   afterAll(stopServer);
 
