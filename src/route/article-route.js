@@ -21,7 +21,7 @@ articleRouter.get('/articles/:article_id', (request, response, next) => {
     })
     .catch(next);
 });
-articleRouter.put('/articles/:article_id', (request, response, next) => {
+articleRouter.put('/articles/:article_id', bearerAuth, jsonParser, (request, response, next) => {
   const options = { new: true, runValidators: true };
   return ArticleModel.findByIdAndUpdate(
     request.params.article_id,
