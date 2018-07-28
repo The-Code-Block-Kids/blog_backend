@@ -50,4 +50,27 @@ describe('Verify POST /comments', () => {
     return Promise.all([mockUser1]);
   });
 });
+describe('Verify DELETE /comment/:comment_id', () => {
+  beforeAll(startServer);
+  afterAll(stopServer);
+
+  test('DELETE /comment', () => {
+    return pCreateUserMock()
+      .then((user) => {
+        return pCreateArticleMock(user)
+      
+          .then((article) => {
+            return pCreateCommentMock(article);
+          })
+          .then((comment) => {
+            return superagent.delete(`${apiURL}/comment/${comment.comment._id}`)
+              .set('Content-Type', 'application/json')
+              .set('Authorization', `Bearer ${user.token}`);
+          })
+          .then((response) => {
+            expect(response.status).toEqual(204);
+          });
+      });
+  });
+});
 

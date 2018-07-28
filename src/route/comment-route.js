@@ -18,5 +18,10 @@ commentRouter.post('/comment', bearerAuth, jsonParser, (request, response, next)
     })
     .catch(next);
 });
+commentRouter.delete('/comment/:comment_id', bearerAuth, (request, response, next) => {
+  return CommentModel.findByIdAndRemove(request.params.comment_id)
+    .then(() => response.sendStatus(204))
+    .catch(next);
+});
 
 export default commentRouter;
