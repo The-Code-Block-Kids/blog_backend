@@ -32,7 +32,6 @@ describe('Verify POST route /user', () => {
       });
   });
 });
-
 describe('Verify GET route /user', () => {
   beforeAll(startServer);
   afterAll(stopServer);

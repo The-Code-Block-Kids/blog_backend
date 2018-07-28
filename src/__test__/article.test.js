@@ -64,3 +64,43 @@ describe('Verify PUT route for Articles', () => {
       });
   });
 });
+describe('Verify POST route for Articles', () => {
+  beforeAll(startServer);
+  afterAll(stopServer);
+
+  test('PUT - /articles', () => {
+    return pCreateUserMock()
+      .then((user) => {
+        return superagent.post(`${apiURL}/articles`)
+          .set('Content-Type', 'application/json')
+          .set('Authorization', `Bearer ${user.token}`)
+          .send({
+            title: faker.lorem.words(3),
+            content: faker.lorem.words(15),
+            createdBy: user.user._id,
+          });
+      })
+      .then((response) => {
+        expect(response.status).toEqual(200);
+      });
+  });
+});
+describe('Verify DELETE route from Articles', () => {
+  beforeAll(startServer);
+  afterAll(stopServer);
+
+  test('DELETE - /articles/:article_id', () => {
+    return pCreateUserMock()
+      .then((user) => {
+        return pCreateArticleMock(user)
+          .then((article) => {
+            return superagent.delete(`${apiURL}/articles/${article.article._id}`)
+              .set('Content-Type', 'application/json')
+              .set('Authorization', `Bearer ${user.token}`);
+          })
+          .then((response) => {
+            expect(response.status).toEqual(204);
+          });
+      });
+  });
+});
