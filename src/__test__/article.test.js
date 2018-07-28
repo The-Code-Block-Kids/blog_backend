@@ -1,9 +1,7 @@
 import superagent from 'superagent';
 import faker from 'faker';
 import { startServer, stopServer } from '../lib/server';
-import { pCreateAccountMock } from './lib/account-mock';
 import { pCreateUserMock } from './lib/user-mock';
-import Account from '../model/account';
 import { pCreateArticleMock } from './lib/article-mock';
 
 const apiURL = `http://localhost:${process.env.PORT}`;
