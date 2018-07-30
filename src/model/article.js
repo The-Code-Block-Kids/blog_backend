@@ -13,6 +13,9 @@ const articleSchema = mongoose.Schema({
     type: Date,
     default: () => new Date(),
   },
+  image: {
+    type: String,
+  },
   link: {
     type: String,
   },
@@ -21,8 +24,8 @@ const articleSchema = mongoose.Schema({
     default: [],
   },
   tags: {
-    type: Array,
-    default: [],
+    type: Object,
+    default: new Set(),
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,

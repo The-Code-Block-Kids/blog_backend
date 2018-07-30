@@ -10,7 +10,6 @@ const pCreateArticleMock = (user) => {
     content: faker.lorem.words(15),
     link: faker.internet.url,
     comments: [],
-    tags: [],
     createdBy: user.user._id,
   }).save()
     .then((article) => {

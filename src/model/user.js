@@ -25,10 +25,6 @@ const userSchema = mongoose.Schema({
   linkedIn: {
     type: String, 
   },
-  email: { 
-    type: String, 
-    required: true, 
-  },
   portfolio: {
     type: String, 
   },

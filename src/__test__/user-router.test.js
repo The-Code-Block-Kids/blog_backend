@@ -27,7 +27,6 @@ describe('Verify POST route /user', () => {
         expect(response.status).toEqual(200);
         expect(response.body.owner).toEqual(accountMock._id.toString());
         expect(response.body.username).toEqual(accountMock.username);
-        expect(response.body.email).toEqual(accountMock.email);
         expect(response.body.gitHub).toEqual('github.com/dummy');
       });
   });
@@ -51,7 +50,6 @@ describe('Verify GET route /user', () => {
         expect(response.status).toEqual(200);
         expect(response.body.owner).toEqual(userMock.user.owner.toString());
         expect(response.body.username).toEqual(userMock.user.username.toString());
-        expect(response.body.email).toEqual(userMock.user.email.toString());
       });
   });
   test('GET - /user should get 400 status and authorization header required', () => {
@@ -96,7 +94,6 @@ describe('Verify PUT route /user', () => {
       .then((response) => {
         expect(response.status).toEqual(200);
         expect(response.body.username).toEqual(userMock.user.username);
-        expect(response.body.email).toEqual('dummy@dummy.com');
         expect(response.body.gitHub).toEqual('github.com/dummy');
         console.log(response.body);
       })
