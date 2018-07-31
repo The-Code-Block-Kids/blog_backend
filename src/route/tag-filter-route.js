@@ -1,23 +1,26 @@
 import { Router } from 'express';
-import { json } from 'body-parser';
 import ArticleModel from '../model/article';
-import logger from '../lib/logger';
 
 const tagFilterRouter = new Router();
-const jsonParser = json();
 
-tagFilterRouter.get('/filter/:id', (request, response, next) => {
-  const solution = [];
-  return ArticleModel.find()
+tagFilterRouter.get('/filter/:query', (request, response, next) => {
+  return ArticleModel.find({ tags: { $all: [request.params.query.toString()] } })
     .then((articles) => {
-      articles.forEach((article) => {
-        if (article.tags) {
-          if (article.tags.has(request.params.id)) solution.push(article);
+      const articlesSort = (property) => {
+        let sortOrder = 1;
+        if (property[0] === '-') {
+          sortOrder = -1;
+          property = property.substr(1); // eslint-disable-line
         }
-      });
-      return response.json(solution);
+        return (a, b) => {
+          const result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0; // eslint-disable-line
+          return result * sortOrder;
+        };
+      };
+      return response.json(articles.sort(articlesSort('-postedOn')));
     })
     .catch(next);
 });
+
 
 export default tagFilterRouter;

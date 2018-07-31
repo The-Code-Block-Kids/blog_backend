@@ -24,7 +24,8 @@ const articleSchema = mongoose.Schema({
     default: [],
   },
   tags: {
-    type: Object,
+    type: Array,
+    default: [],
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,

@@ -34,19 +34,16 @@ articleRouter.put('/articles/:article_id', bearerAuth, jsonParser, (request, res
     .catch(next);
 });
 articleRouter.post('/articles', bearerAuth, jsonParser, (request, response, next) => {
-  const tagSet = new Set();
-  request.body.tags.forEach(tag => tagSet.add(tag));
   return new ArticleModel({
     title: request.body.title,
     content: request.body.content,
     postedOn: request.body.postedOn,
     link: request.body.link,
     comments: request.body.comments,
-    tags: tagSet,
+    tags: request.body.tags,
     createdBy: request.body.createdBy,
   }).save()
     .then((article) => {
-      console.log('Article DB save() return value: \n', article);
       logger.log(logger.INFO, 'Returning a 200 and a new Article');
       return response.json(article);
     })

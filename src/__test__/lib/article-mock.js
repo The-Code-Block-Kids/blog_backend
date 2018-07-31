@@ -6,13 +6,11 @@ import tagSetMock from '../lib/tag-set-mock';
 
 const pCreateArticleMock = (user) => {
   const resultMock = {};
-  const tagSet = new Set();
-  tagSetMock[0].forEach(tag => tagSet.add(tag));
   return new Article({
     title: faker.lorem.words(3),
     content: faker.lorem.words(15),
     link: faker.internet.url,
-    tags: tagSet, 
+    tags: tagSetMock[Math.floor(Math.random() * Math.floor(3))], 
     comments: [],
     createdBy: user.user._id,
   }).save()

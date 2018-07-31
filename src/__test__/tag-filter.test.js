@@ -18,7 +18,7 @@ describe('Verify GET routes for Tag Sorting', () => {
           pCreateArticleMock(user),
         ]);
       })
-      .then((articles) => {
+      .then(() => {
         return superagent.get(`${apiURL}/filter/JavaScript`)
           .then((response) => {
             expect(response.status).toEqual(200);

@@ -82,7 +82,6 @@ describe('Verify POST route for Articles', () => {
           });
       })
       .then((response) => {
-        console.log('superagent POST response.body \n', response.body);
         expect(response.status).toEqual(200);
       });
   });
