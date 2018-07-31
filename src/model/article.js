@@ -25,7 +25,6 @@ const articleSchema = mongoose.Schema({
   },
   tags: {
     type: Object,
-    default: new Set(),
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,

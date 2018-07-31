@@ -68,7 +68,7 @@ describe('Verify POST route for Articles', () => {
   beforeAll(startServer);
   afterAll(stopServer);
 
-  test('PUT - /articles', () => {
+  test('POST - /articles', () => {
     return pCreateUserMock()
       .then((user) => {
         return superagent.post(`${apiURL}/articles`)
@@ -78,9 +78,11 @@ describe('Verify POST route for Articles', () => {
             title: faker.lorem.words(3),
             content: faker.lorem.words(15),
             createdBy: user.user._id,
+            tags: ['JavaScript', 'Node.js', 'Back-End'],
           });
       })
       .then((response) => {
+        console.log('superagent POST response.body \n', response.body);
         expect(response.status).toEqual(200);
       });
   });
