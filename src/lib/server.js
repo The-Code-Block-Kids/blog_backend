@@ -11,6 +11,7 @@ import userRoute from '../route/user-route';
 import articleRoute from '../route/article-route';
 import commentRoute from '../route/comment-route';
 import tagFilter from '../route/tag-filter-route';
+import authorFilter from '../route/author-filter-route';
 
 const app = express();
 let server = null;
@@ -27,6 +28,7 @@ app.use(userRoute);
 app.use(articleRoute);
 app.use(commentRoute);
 app.use(tagFilter);
+app.use(authorFilter);
 app.all('*', (request, response) => {
   logger.log(logger.INFO, 'SERVER: Returning a 404 from the catch-all/default route');
   return response.sendStatus(404);
